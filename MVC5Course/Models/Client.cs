@@ -11,7 +11,9 @@ namespace MVC5Course.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel;
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Client
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,13 +21,30 @@ namespace MVC5Course.Models
         {
             this.Order = new HashSet<Order>();
         }
-    
+
         public int ClientId { get; set; }
+        [Required]
+        [StringLength(10, ErrorMessage = "{0}最大不得超過{1}個字元")] //{0}:欄位名稱 {1}:參數值\
+        [DisplayName("名")]
         public string FirstName { get; set; }
+        [Required]
+        [StringLength(10, ErrorMessage = "{0}最大不得超過{1}個字元")]
+        [DisplayName("中間名")]
         public string MiddleName { get; set; }
+        [Required]
+        [StringLength(10, ErrorMessage = "{0}最大不得超過{1}個字元")]
+        [DisplayName("姓")]
         public string LastName { get; set; }
+        [Required]
+        [RegularExpression("[MF]", ErrorMessage = "{0}只能輸入M或F")]
+        [DisplayName("性別")]
         public string Gender { get; set; }
+        [DisplayName("生日")]
+        [DisplayFormat(DataFormatString ="{0:yyyy-MM-dd}",ApplyFormatInEditMode =true)]  //ApplyFormatInEditMode:使Edit時也套用此格式
+        [DataType(DataType.Date)]   //現成日期選單 only Chrome use
         public Nullable<System.DateTime> DateOfBirth { get; set; }
+        [DisplayName("信用評等")]
+        [Range(0,9,ErrorMessage ="{0}必須介於0-9")]
         public Nullable<double> CreditRating { get; set; }
         public string XCode { get; set; }
         public Nullable<int> OccupationId { get; set; }
@@ -37,7 +56,7 @@ namespace MVC5Course.Models
         public Nullable<double> Longitude { get; set; }
         public Nullable<double> Latitude { get; set; }
         public string Notes { get; set; }
-    
+
         public virtual Occupation Occupation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Order { get; set; }

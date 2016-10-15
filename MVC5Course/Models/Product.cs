@@ -20,11 +20,12 @@ namespace MVC5Course.Models
         {
             this.OrderLine = new HashSet<OrderLine>();
         }
-    
+
         public int ProductId { get; set; }
         [Required]
         public string ProductName { get; set; }
         [Required]
+        [DisplayFormat(DataFormatString ="{0:#,#}")] //整數
         public Nullable<decimal> Price { get; set; }
         [Required]
         public Nullable<bool> Active { get; set; }
