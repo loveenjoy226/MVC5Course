@@ -18,6 +18,13 @@ namespace MVC5Course.Controllers
         // GET: Clients
         public ActionResult Index(string search)
         {
+            var data = from p in db.Client
+                       where p.FirstName.Contains(search)
+                       select new
+                       {
+                           p.FirstName,
+                           p.LastName
+                       };
             var client = db.Client.Include(c => c.Occupation);
             if(!string.IsNullOrEmpty(search))
             {//搜尋功能
