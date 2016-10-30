@@ -13,6 +13,8 @@ namespace MVC5Course
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            //routes.MapMvcAttributeRoutes();  //屬性路由機制
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

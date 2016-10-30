@@ -11,9 +11,9 @@ using MVC5Course.Models.ViewModels;
 
 namespace MVC5Course.Controllers
 {
-    public class ClientsController : Controller
+    public class ClientsController : BaseController
     {
-        private FabricsEntities db = new FabricsEntities();
+        //private FabricsEntities db = new FabricsEntities(); 繼承BaseController 已經宣告
 
         // GET: Clients
         public ActionResult Index(string search)
@@ -100,7 +100,7 @@ namespace MVC5Course.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "ClientId,FirstName,MiddleName,LastName,Gender,DateOfBirth,CreditRating,XCode,OccupationId,TelephoneNumber,Street1,Street2,City,ZipCode,Longitude,Latitude,Notes")] Client client)
-        {
+        {//模型繫結 預先驗證
             if (ModelState.IsValid)
             {
                 db.Entry(client).State = EntityState.Modified;
@@ -110,6 +110,20 @@ namespace MVC5Course.Controllers
             ViewBag.OccupationId = new SelectList(db.Occupation, "OccupationId", "OccupationName", client.OccupationId);
             return View(client);
         }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(int? id,FormCollection form)//FormCollection form 無用 
+        {//模型繫結 延遲驗證
+            var client = db.Client.Find(id);
+            if (TryUpdateModel(client, null, null, new string[] { "IsAdmin" }))
+            {
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            ViewBag.OccupationId = new SelectList(db.Occupation, "OccupationId", "OccupationName", client.OccupationId);
+            return View(client);
+        }
+
 
         // GET: Clients/Delete/5
         public ActionResult Delete(int? id)
