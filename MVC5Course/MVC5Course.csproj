@@ -178,12 +178,15 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\ClientsController.cs" />
     <Compile Include="Controllers\EFController.cs" />
+    <Compile Include="Controllers\FormController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LocalDebugOnlyAttribute.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MBController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\Share頁面上常用的ViewBag變數資料Attribute.cs" />
+    <Compile Include="Controllers\VTController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -294,13 +297,22 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="calendar.html" />
+    <Content Include="chart.html" />
     <Content Include="Content\8898999353374.jpg" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="file-manager.html" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="form.html" />
+    <Content Include="gallery.html" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="icon.html" />
+    <Content Include="index.html" />
+    <Content Include="login.html" />
+    <Content Include="messages.html" />
     <Content Include="Models\EFGeneratePartialClass.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>EFGeneratePartialClass.cs</LastGenOutput>
@@ -321,6 +333,9 @@
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Views\Shared\EditorTemplates\Client.cshtml" />
+    <Content Include="Views\VT\_ViewStart.cshtml" />
+    <Content Include="widgets.html" />
     <EntityDeploy Include="Models\Fabrics.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Fabrics.Designer.cs</LastGenOutput>
@@ -328,6 +343,7 @@
     <Content Include="Models\Fabrics.edmx.diagram">
       <DependentUpon>Fabrics.edmx</DependentUpon>
     </Content>
+    <Content Include="README.md" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -340,6 +356,13 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="submenu.html" />
+    <Content Include="submenu2.html" />
+    <Content Include="submenu3.html" />
+    <Content Include="table.html" />
+    <Content Include="tasks.html" />
+    <Content Include="typography.html" />
+    <Content Include="ui.html" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -397,9 +420,22 @@
     <Content Include="Views\MB\MyForm.cshtml" />
     <Content Include="Views\MB\MyFormResult.cshtml" />
     <Content Include="Views\MB\ProductList.cshtml" />
+    <Content Include="Views\Shared\Error_DbEntityValidationException.cshtml" />
+    <Content Include="Views\VT\Index.cshtml" />
+    <Content Include="Views\VT\NewIndex.cshtml" />
+    <Content Include="Views\Shared\_LayoutBootstrap.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Form\Index.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Client.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\CreditRating.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="css\" />
+    <Folder Include="font\" />
+    <Folder Include="img\" />
+    <Folder Include="js\" />
     <Folder Include="Views\Base\" />
   </ItemGroup>
   <ItemGroup>

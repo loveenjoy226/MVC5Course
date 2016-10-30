@@ -1,0 +1,31 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    ViewBag.Title = "錯誤";
+}
+
+<h1 class="text-danger">錯誤。</h1>
+<h2 class="text-danger">處理您的要求時發生錯誤。</h2>
+
+@using System.Data.Entity.Validation;
+@{ //強行別作法
+    var ex=Model.Exception as DbEntityValidationException;
+}
+<h3>所有的驗證錯誤如下</h3>
+<table>
+    <tr>
+        <td>屬性名稱</td>
+        <td>錯誤訊息</td>
+    </tr>
+    @foreach (var eve in ex.EntityValidationErrors)
+    {
+        foreach (var err in eve.ValidationErrors)
+        {
+            <tr>
+                <td>@err.PropertyName</td>
+                <td>@err.ErrorMessage</td>
+            </tr>
+        }
+    }
+</table>
+@*快速產生一個table兩個tr兩個td: table>tr*2>td*2   +Tab*@

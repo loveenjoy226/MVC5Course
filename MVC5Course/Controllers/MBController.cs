@@ -1,17 +1,19 @@
 ﻿using MVC5Course.Models.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
 namespace MVC5Course.Controllers
 {
+    [HandleError(ExceptionType = typeof(DbEntityValidationException), View = "Error_DbEntityValidationException")]
+    [LocalDebugOnly]
     public class MBController : BaseController
     {
         // GET: MB
         [Share頁面上常用的ViewBag變數資料]    //將可共用controller的code搬走 
-        [LocalDebugOnly]
         public ActionResult Index()
         {
             //ViewData["Temp1"] = "暫存資料";
@@ -59,7 +61,7 @@ namespace MVC5Course.Controllers
              *      item.ProductId 
              *      item[i].ProductId 
              */
-             if(ModelState.IsValid)
+            //if(ModelState.IsValid)
             {
                 foreach(var i in items)
                 {
@@ -69,10 +71,15 @@ namespace MVC5Course.Controllers
                     product.Stock = i.Stock;
                     product.Price = i.Price;
                 }
-                db.SaveChanges();
+                db.SaveChanges();//有跳出例外的話 就是不符合DB的規則
                 return RedirectToAction("ProductList");
             }
             return View();
         }
-    }
+        public ActionResult MyError()
+         {
+             throw new InvalidOperationException("ERROR");
+             return View();
+         }
+}
 }

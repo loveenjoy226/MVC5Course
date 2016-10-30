@@ -16,21 +16,27 @@ namespace MVC5Course.Controllers
         //private FabricsEntities db = new FabricsEntities(); 繼承BaseController 已經宣告
 
         // GET: Clients
-        public ActionResult Index(string search)
+        public ActionResult Index(string search,int? CreditRating, string Gender)
         {
-            var data = from p in db.Client
-                       where p.FirstName.Contains(search)
-                       select new
-                       {
-                           p.FirstName,
-                           p.LastName
-                       };
+            //var data = from p in db.Client
+            //           where p.FirstName.Contains(search)
+            //           select new
+            //           {
+            //               p.FirstName,
+            //               p.LastName
+            //           };
             var client = db.Client.Include(c => c.Occupation);
             if(!string.IsNullOrEmpty(search))
             {//搜尋功能
                 client = client.Where(p => p.FirstName.Contains(search));
             }
             client = client.OrderByDescending(c => c.ClientId).Take(10);    //以ClientId做排序 取得10筆
+            
+            //做selectList搜尋
+            var options = (from p in db.Client select p.CreditRating).Distinct().OrderBy(p => p).ToList();
+            ViewBag.CreditRating = new SelectList(options);
+            ViewBag.Gender = new SelectList(new string[] { "M", "F" });
+
             return View(client);
         }
 
@@ -50,6 +56,7 @@ namespace MVC5Course.Controllers
         }
 
         // GET: Clients/Create
+        [ChildActionOnly]
         public ActionResult Create()
         {
             ViewBag.OccupationId = new SelectList(db.Occupation, "OccupationId", "OccupationName");
